@@ -1,0 +1,13 @@
+{
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mliu95/quintus-tag.git"
+  },
+  "name": "quintus-tag",
+  "author": "Michael Liu",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.6.1",
+    "socket.io": "^1.0.6"
+  }
+}
