@@ -35,6 +35,12 @@ require([], function () {
           }, 3000);
         }
       });
+
+      this.on('join', function () {
+        this.p.invincible = true;
+        this.p.opacity = 0.5;
+        this.p.speed = 400;
+      });
     },
     step: function (dt) {
       if (Q.inputs['up']) {

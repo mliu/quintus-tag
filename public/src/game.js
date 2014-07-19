@@ -10,7 +10,16 @@ var objectFiles = [
   './src/player'
 ];
 
+var selfId;
+
 require(objectFiles, function () {
+  function setUp (stage) {
+    socket.on('connected', function (data) {
+      selfId = data['playerId'];
+      var player = new Q.Player({ x: 100, y: 100 })
+    });
+  }
+
   Q.scene('arena', function (stage) {
     stage.collisionLayer(new Q.TileLayer({ dataAsset: '/maps/arena.json', sheet: 'tiles' }));
 
