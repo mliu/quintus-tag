@@ -21,9 +21,16 @@ require(objectFiles, function () {
   function setUp (stage) {
     socket.on('connected', function (data) {
       selfId = data['playerId'];
-      player = new Q.Player({ playerId: selfId, x: 100, y: 100, socket: socket });
-      stage.insert(player);
-      player.trigger('join');
+      if (data['tagged']) {
+        player = new Q.Player({ playerId: selfId, x: 100, y: 100, socket: socket });
+        player.p.sheet = 'enemy'
+        player.p.tagged = true;
+        stage.insert(player);
+      } else {
+        player = new Q.Player({ playerId: selfId, x: 100, y: 100, socket: socket });
+        stage.insert(player);
+        player.trigger('join');
+      }
       stage.add('viewport').follow(player);
     });
 
@@ -36,6 +43,9 @@ require(objectFiles, function () {
         actor.player.p.y = data['y'];
         actor.player.p.sheet = data['sheet'];
         actor.player.p.opacity = data['opacity'];
+        actor.player.p.invincible = data['invincible'];
+        actor.player.p.tagged = data['tagged'];
+        actor.player.p.update = true;
       } else {
         var temp = new Q.Actor({ playerId: data['playerId'], x: data['x'], y: data['y'], sheet: data['sheet'], opacity: data['opacity'], invincible: data['invincible'], tagged: data['tagged'] });
         players.push({ player: temp, playerId: data['playerId'] });

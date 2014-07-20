@@ -1,10 +1,20 @@
 require([], function () {
   Q.Sprite.extend('Actor', {
     init: function (p) {
-      this._super(p);
+      this._super(p, {
+        update: true
+      });
+
+      var temp = this;
+      setInterval(function () {
+        if (!temp.p.update) {
+          temp.destroy();
+        }
+        temp.p.update = false;
+      }, 3000);
 
       this.add('animation');
-    }
+    } 
   });
 
   Q.Sprite.extend('Player', {
@@ -21,9 +31,10 @@ require([], function () {
     },
     addEventListeners: function () {
       this.on('hit', function (collision) {
-        if (this.p.tagged && !collision.obj.p.tagged && !collision.obj.p.invincible) {
-          console.log("tag " + collision.obj.p.playerId);
+        if (this.p.tagged && collision.obj.isA('Actor') && !collision.obj.p.tagged && !collision.obj.p.invincible) {
           this.p.socket.emit('tag', { playerId: collision.obj.p.playerId });
+          this.p.tagged = false;
+          this.p.sheet = 'player';
           this.p.invincible = true;
           this.p.opacity = 0.5;
           this.p.speed = 300;
