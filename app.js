@@ -11,6 +11,7 @@ app.get('/', function(req, res){
 
 var playerCount = 0;
 var id = 0;
+var tagged = false;
 
 io.on('connection', function (socket) {
   playerCount++;
