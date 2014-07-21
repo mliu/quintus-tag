@@ -9,9 +9,9 @@ Q.gravityY = 0;
 require(['socket.io/socket.io.js']);
 
 var players = [];
-var selfId;
-var player;
-var socket = io.connect('http://localhost:80');
+var socket = io.connect('http://http://162.209.125.157/:80');
+var UiPlayers = document.getElementById("players");
+var selfId, player;
 
 var objectFiles = [
   './src/player'

@@ -3,7 +3,17 @@
     <script src="lib/quintus-all.js"></script>
     <script src="socket.io/socket.io.js"></script>
   </head>
+  <style>
+    .players {
+      position: absolute;
+      padding-top: 10px;
+      padding-right: 10px;
+      right: 0;
+      text-align: right;
+    }
+  </style>
   <body>
+    <span id="players" class="players"></span>
     <script src="/lib/require.min.js"></script>
     <script src="src/game.js"></script>
   </body>
