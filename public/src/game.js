@@ -9,7 +9,7 @@ Q.gravityY = 0;
 require(['socket.io/socket.io.js']);
 
 var players = [];
-var socket = io.connect('http://162.209.125.157:80');
+var socket = io.connect('http://localhost:8080');
 var UiPlayers = document.getElementById("players");
 var selfId, player;
 
@@ -19,6 +19,10 @@ var objectFiles = [
 
 require(objectFiles, function () {
   function setUp (stage) {
+    socket.on('count', function (data) {
+      UiPlayers.innerHTML = 'Players: ' + data['playerCount'];
+    });
+
     socket.on('connected', function (data) {
       selfId = data['playerId'];
       if (data['tagged']) {

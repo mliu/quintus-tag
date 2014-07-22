@@ -12,8 +12,6 @@ require([], function () {
         }
         temp.p.update = false;
       }, 3000);
-
-      this.add('animation');
     } 
   });
 

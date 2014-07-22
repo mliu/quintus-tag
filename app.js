@@ -18,15 +18,16 @@ io.on('connection', function (socket) {
   id++;
   setTimeout(function () {
     if (!tagged) {
-      socket.emit('connected', { playerCount: playerCount, playerId: id, tagged: true });
+      socket.emit('connected', { playerId: id, tagged: true });
     } else {
-      socket.emit('connected', { playerCount: playerCount, playerId: id });
+      socket.emit('connected', { playerId: id });
     }
-  }, 1000);
+    io.emit('count', { playerCount: playerCount });
+  }, 1500);
   
   socket.on('disconnect', function () {
     playerCount--;
-    io.emit('disconnected', { playerCount: playerCount });
+    io.emit('count', { playerCount: playerCount });
   });
   
   socket.on('update', function (data) {
@@ -45,5 +46,5 @@ setInterval(function () {
   tagged = false;
 }, 3000);
 
-server.listen(80);
+server.listen(8080);
 console.log("Multiplayer app listening on port 80");
