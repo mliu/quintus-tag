@@ -9,7 +9,7 @@ Q.gravityY = 0;
 require(['socket.io/socket.io.js']);
 
 var players = [];
-var socket = io.connect('http://104.131.190.55/:8080');
+var socket = io.connect('http://104.131.190.55:8080');
 var UiPlayers = document.getElementById("players");
 var selfId, player;
 
